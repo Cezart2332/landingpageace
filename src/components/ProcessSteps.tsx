@@ -1,26 +1,26 @@
-'use client'
-
 import { Lightbulb, Rocket, Search } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
+
+type Props = {
+  process: Translations['process']
+}
 
 const stepIcons: LucideIcon[] = [Search, Lightbulb, Rocket]
 const stepNumbers = ['01', '02', '03']
 
-export default function ProcessSteps() {
-  const { t } = useLanguage()
-
+export default function ProcessSteps({ process }: Props) {
   return (
     <section id="process" className="section section-solid">
       <div className="container">
         <SectionHeader
-          label={t.process.label}
-          title={t.process.title}
-          description={t.process.description}
+          label={process.label}
+          title={process.title}
+          description={process.description}
         />
         <ol className="process-steps" data-reveal-stagger>
-          {t.process.items.map((item, index) => {
+          {process.items.map((item, index) => {
             const Icon = stepIcons[index]
             const step = stepNumbers[index]
             return (

@@ -1,6 +1,7 @@
-'use client'
-
-import { useLanguage } from '@/i18n/LanguageProvider'
+type Props = {
+  label: string
+  a11yLabel: string
+}
 
 const partners = [
   'Northline',
@@ -11,14 +12,12 @@ const partners = [
   'CloudNine',
 ]
 
-export default function TrustBar() {
-  const { t } = useLanguage()
-
+export default function TrustBar({ label, a11yLabel }: Props) {
   return (
-    <section className="trust-bar section-solid" aria-label={t.a11y.companies}>
+    <section className="trust-bar section-solid" aria-label={a11yLabel}>
       <div className="container">
         <p className="trust-label" data-reveal>
-          {t.trust.label}
+          {label}
         </p>
         <ul className="trust-logos" data-reveal-stagger>
           {partners.map((name) => (

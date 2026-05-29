@@ -1,17 +1,16 @@
-'use client'
+import type { Translations } from '@/i18n/translations'
 
-import { useLanguage } from '@/i18n/LanguageProvider'
+type Props = {
+  hero: Translations['hero']
+}
 
-export default function HeroSection() {
-  const { t } = useLanguage()
-  const headlineWords = t.hero.headline
-
+export default function HeroSection({ hero }: Props) {
   return (
     <section className="hero" id="hero">
       <div className="hero-content">
-        <span className="hero-badge hero-reveal">{t.hero.badge}</span>
+        <span className="hero-badge hero-reveal">{hero.badge}</span>
         <h1 className="hero-title">
-          {headlineWords.map((word, i) => (
+          {hero.headline.map((word, i) => (
             <span
               key={`${word}-${i}`}
               className={`hero-word ${i >= 3 ? 'hero-word-accent' : ''}`}
@@ -20,13 +19,13 @@ export default function HeroSection() {
             </span>
           ))}
         </h1>
-        <p className="hero-sub hero-reveal">{t.hero.sub}</p>
+        <p className="hero-sub hero-reveal">{hero.sub}</p>
         <div className="hero-actions hero-reveal">
           <a href="#contact" className="btn btn-primary">
-            {t.hero.ctaPrimary}
+            {hero.ctaPrimary}
           </a>
           <a href="#solutions" className="btn btn-secondary">
-            {t.hero.ctaSecondary}
+            {hero.ctaSecondary}
           </a>
         </div>
       </div>

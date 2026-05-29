@@ -1,28 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
 
-export default function Faq() {
+type Props = {
+  faq: Translations['faq']
+}
+
+export default function Faq({ faq }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const { t, locale } = useLanguage()
-
-  useEffect(() => {
-    setOpenIndex(null)
-  }, [locale])
 
   return (
     <section id="faq" className="section section-solid">
       <div className="container container-narrow">
         <SectionHeader
-          label={t.faq.label}
-          title={t.faq.title}
-          description={t.faq.description}
+          label={faq.label}
+          title={faq.title}
+          description={faq.description}
         />
         <ul className="faq-list" data-reveal-stagger>
-          {t.faq.items.map((item, index) => {
+          {faq.items.map((item, index) => {
             const isOpen = openIndex === index
             return (
               <li key={index} className="faq-item" data-reveal-child>

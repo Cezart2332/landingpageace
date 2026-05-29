@@ -1,23 +1,20 @@
-'use client'
-
 import AnimatedStat from './AnimatedStat'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
 
-export default function StatsBand() {
-  const { t } = useLanguage()
+type Props = {
+  stats: Translations['stats']
+  a11yLabel: string
+}
 
+export default function StatsBand({ stats, a11yLabel }: Props) {
   return (
-    <section className="stats-band" aria-label={t.a11y.metrics}>
+    <section className="stats-band" aria-label={a11yLabel}>
       <div className="container">
         <ul className="stats-grid" data-reveal-stagger data-count-trigger>
-          <AnimatedStat end={120} suffix="+" label={t.stats.projects} />
-          <AnimatedStat end={98} suffix="%" label={t.stats.satisfaction} />
-          <AnimatedStat
-            end={8}
-            suffix={t.stats.experienceSuffix}
-            label={t.stats.experience}
-          />
-          <AnimatedStat end={24} suffix="/7" label={t.stats.support} />
+          <AnimatedStat end={120} suffix="+" label={stats.projects} />
+          <AnimatedStat end={98} suffix="%" label={stats.satisfaction} />
+          <AnimatedStat end={8} suffix={stats.experienceSuffix} label={stats.experience} />
+          <AnimatedStat end={24} suffix="/7" label={stats.support} />
         </ul>
       </div>
     </section>

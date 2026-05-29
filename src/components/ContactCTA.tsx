@@ -4,10 +4,13 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
 
-export default function ContactCTA() {
-  const { t } = useLanguage()
+type Props = {
+  contact: Translations['contact']
+}
+
+export default function ContactCTA({ contact }: Props) {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
@@ -21,11 +24,11 @@ export default function ContactCTA() {
     const message = (data.get('message') as string)?.trim()
 
     if (!name || !email || !message) {
-      setError(t.contact.errorRequired)
+      setError(contact.errorRequired)
       return
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError(t.contact.errorEmail)
+      setError(contact.errorEmail)
       return
     }
 
@@ -40,9 +43,9 @@ export default function ContactCTA() {
           <div className="contact-info">
             <SectionHeader
               align="left"
-              label={t.contact.label}
-              title={t.contact.title}
-              description={t.contact.description}
+              label={contact.label}
+              title={contact.title}
+              description={contact.description}
             />
             <ul className="contact-details">
               <li>
@@ -55,7 +58,7 @@ export default function ContactCTA() {
               </li>
               <li>
                 <MapPin size={18} aria-hidden="true" />
-                <span>{t.contact.location}</span>
+                <span>{contact.location}</span>
               </li>
             </ul>
           </div>
@@ -63,14 +66,14 @@ export default function ContactCTA() {
           <div className="contact-form-wrap" data-reveal>
             {submitted ? (
               <div className="contact-success" role="status">
-                <h3>{t.contact.successTitle}</h3>
-                <p>{t.contact.successMessage}</p>
+                <h3>{contact.successTitle}</h3>
+                <p>{contact.successMessage}</p>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   onClick={() => setSubmitted(false)}
                 >
-                  {t.contact.sendAnother}
+                  {contact.sendAnother}
                 </button>
               </div>
             ) : (
@@ -80,35 +83,35 @@ export default function ContactCTA() {
                 noValidate
               >
                 <div className="form-row">
-                  <label htmlFor="name">{t.contact.formName}</label>
+                  <label htmlFor="name">{contact.formName}</label>
                   <input
                     id="name"
                     name="name"
                     type="text"
                     autoComplete="name"
                     required
-                    placeholder={t.contact.placeholderName}
+                    placeholder={contact.placeholderName}
                   />
                 </div>
                 <div className="form-row">
-                  <label htmlFor="email">{t.contact.formEmail}</label>
+                  <label htmlFor="email">{contact.formEmail}</label>
                   <input
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
                     required
-                    placeholder={t.contact.placeholderEmail}
+                    placeholder={contact.placeholderEmail}
                   />
                 </div>
                 <div className="form-row">
-                  <label htmlFor="message">{t.contact.formMessage}</label>
+                  <label htmlFor="message">{contact.formMessage}</label>
                   <textarea
                     id="message"
                     name="message"
                     rows={5}
                     required
-                    placeholder={t.contact.placeholderMessage}
+                    placeholder={contact.placeholderMessage}
                   />
                 </div>
                 {error && (
@@ -118,7 +121,7 @@ export default function ContactCTA() {
                 )}
                 <button type="submit" className="btn btn-primary btn-full">
                   <Send size={18} aria-hidden="true" />
-                  {t.contact.submit}
+                  {contact.submit}
                 </button>
               </form>
             )}

@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Cloud,
   Code2,
@@ -9,29 +7,25 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
 
-const solutionIcons: LucideIcon[] = [
-  Code2,
-  Cloud,
-  Plug,
-  Workflow,
-  Headphones,
-]
+type Props = {
+  solutions: Translations['solutions']
+}
 
-export default function SolutionsGrid() {
-  const { t } = useLanguage()
+const solutionIcons: LucideIcon[] = [Code2, Cloud, Plug, Workflow, Headphones]
 
+export default function SolutionsGrid({ solutions }: Props) {
   return (
     <section id="solutions" className="section section-soft">
       <div className="container">
         <SectionHeader
-          label={t.solutions.label}
-          title={t.solutions.title}
-          description={t.solutions.description}
+          label={solutions.label}
+          title={solutions.title}
+          description={solutions.description}
         />
         <ul className="solutions-grid" data-reveal-stagger>
-          {t.solutions.items.map((item, index) => {
+          {solutions.items.map((item, index) => {
             const Icon = solutionIcons[index]
             return (
               <li

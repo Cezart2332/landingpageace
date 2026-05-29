@@ -1,10 +1,5 @@
-import Providers from '@/components/Providers'
-import LandingPage from '@/landing/LandingPage'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
-  return (
-    <Providers>
-      <LandingPage />
-    </Providers>
-  )
+export default function RootPage() {
+  redirect('/ro')
 }

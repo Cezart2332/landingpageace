@@ -1,25 +1,25 @@
-'use client'
-
 import { Layers, Shield, Zap } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
+
+type Props = {
+  why: Translations['why']
+}
 
 const pillarIcons: LucideIcon[] = [Zap, Shield, Layers]
 
-export default function WhyUs() {
-  const { t } = useLanguage()
-
+export default function WhyUs({ why }: Props) {
   return (
     <section id="why" className="section section-solid">
       <div className="container">
         <SectionHeader
-          label={t.why.label}
-          title={t.why.title}
-          description={t.why.description}
+          label={why.label}
+          title={why.title}
+          description={why.description}
         />
         <ul className="pillars-grid" data-reveal-stagger>
-          {t.why.items.map((item, index) => {
+          {why.items.map((item, index) => {
             const Icon = pillarIcons[index]
             return (
               <li key={item.title} className="pillar-card" data-reveal-child>

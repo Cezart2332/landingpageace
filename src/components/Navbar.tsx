@@ -3,11 +3,16 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import LanguageSwitch from './LanguageSwitch'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
+import type { Locale } from '@/i18n/types'
 
-export default function Navbar() {
+type Props = {
+  locale: Locale
+  t: Translations
+}
+
+export default function Navbar({ t }: Props) {
   const [open, setOpen] = useState(false)
-  const { t } = useLanguage()
 
   const links = [
     { href: '#solutions', label: t.nav.solutions },
@@ -21,7 +26,10 @@ export default function Navbar() {
     <header className="navbar" data-animate="nav">
       <nav className="navbar-inner" aria-label={t.a11y.mainNav}>
         <div className="navbar-lang-slot">
-          <LanguageSwitch />
+          <LanguageSwitch
+            switchToRo={t.a11y.switchToRo}
+            switchToEn={t.a11y.switchToEn}
+          />
         </div>
 
         <button

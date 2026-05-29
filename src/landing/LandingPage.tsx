@@ -1,11 +1,13 @@
 'use client'
 
 import '@/gsap/setup'
+import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { ScrollTrigger } from '@/gsap/setup'
 import { useLandingAnimations } from '@/hooks/useLandingAnimations'
+import type { Locale } from '@/i18n/types'
+import type { Translations } from '@/i18n/translations'
 import Navbar from '@/components/Navbar'
-import PageCanvas from '@/components/PageCanvas'
 import HeroSection from '@/components/HeroSection'
 import StatsBand from '@/components/StatsBand'
 import TrustBar from '@/components/TrustBar'
@@ -18,7 +20,14 @@ import CtaBanner from '@/components/CtaBanner'
 import ContactCTA from '@/components/ContactCTA'
 import Footer from '@/components/Footer'
 
-export default function LandingPage() {
+const PageCanvas = dynamic(() => import('@/components/PageCanvas'), { ssr: false })
+
+type LandingPageProps = {
+  locale: Locale
+  t: Translations
+}
+
+export default function LandingPage({ locale, t }: LandingPageProps) {
   const pageRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
 
@@ -48,22 +57,22 @@ export default function LandingPage() {
       </div>
 
       <div className="ui-layer">
-        <Navbar />
+        <Navbar locale={locale} t={t} />
         <main className="site-main">
           <div className="over-canvas">
-            <HeroSection />
-            <StatsBand />
+            <HeroSection hero={t.hero} />
+            <StatsBand stats={t.stats} a11yLabel={t.a11y.metrics} />
           </div>
-          <TrustBar />
-          <SolutionsGrid />
-          <WhyUs />
-          <ProcessSteps />
-          <Testimonials />
-          <Faq />
-          <CtaBanner />
-          <ContactCTA />
+          <TrustBar label={t.trust.label} a11yLabel={t.a11y.companies} />
+          <SolutionsGrid solutions={t.solutions} />
+          <WhyUs why={t.why} />
+          <ProcessSteps process={t.process} />
+          <Testimonials testimonials={t.testimonials} a11yStars={t.a11y.stars} />
+          <Faq faq={t.faq} />
+          <CtaBanner cta={t.cta} />
+          <ContactCTA contact={t.contact} />
+          <Footer footer={t.footer} nav={t.nav} a11y={t.a11y} />
         </main>
-        <Footer />
       </div>
     </div>
   )

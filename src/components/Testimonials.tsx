@@ -1,24 +1,25 @@
-'use client'
-
 import { Star } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-import { useLanguage } from '@/i18n/LanguageProvider'
+import type { Translations } from '@/i18n/translations'
 
-export default function Testimonials() {
-  const { t } = useLanguage()
+type Props = {
+  testimonials: Translations['testimonials']
+  a11yStars: string
+}
 
+export default function Testimonials({ testimonials, a11yStars }: Props) {
   return (
     <section id="testimonials" className="section section-solid">
       <div className="container">
         <SectionHeader
-          label={t.testimonials.label}
-          title={t.testimonials.title}
-          description={t.testimonials.description}
+          label={testimonials.label}
+          title={testimonials.title}
+          description={testimonials.description}
         />
         <ul className="testimonials-grid">
-          {t.testimonials.items.map((item) => (
+          {testimonials.items.map((item) => (
             <li key={item.name} className="testimonial-card">
-              <div className="testimonial-stars" aria-label={t.a11y.stars}>
+              <div className="testimonial-stars" aria-label={a11yStars}>
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={14} fill="currentColor" aria-hidden="true" />
                 ))}
