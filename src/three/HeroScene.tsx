@@ -27,8 +27,8 @@ export default function HeroScene() {
     const particleCount = 2200
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
-    const c1 = new THREE.Color(0x10b981)
-    const c2 = new THREE.Color(0x34d399)
+    const c1 = new THREE.Color(0x2563eb)
+    const c2 = new THREE.Color(0x60a5fa)
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
@@ -69,7 +69,7 @@ export default function HeroScene() {
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(2.6, 0.04, 16, 100),
       new THREE.MeshBasicMaterial({
-        color: 0x10b981,
+        color: 0x2563eb,
         transparent: true,
         opacity: 0.6,
       }),
@@ -80,7 +80,7 @@ export default function HeroScene() {
     const outerRing = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.35, 0.2, 128, 20),
       new THREE.MeshBasicMaterial({
-        color: 0x6ee7b7,
+        color: 0x93c5fd,
         wireframe: true,
         transparent: true,
         opacity: 0.45,

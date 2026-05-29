@@ -1,19 +1,13 @@
 import type { Metadata } from 'next'
-import { DM_Sans, Space_Grotesk } from 'next/font/google'
+import { Geist } from 'next/font/google'
 import { translations } from '@/i18n/translations'
 import type { Locale } from '@/i18n/types'
 import '@/app/globals.css'
 
-const spaceGrotesk = Space_Grotesk({
+const geist = Geist({
   subsets: ['latin'],
-  variable: '--font-heading',
-  weight: ['400', '500', '600', '700'],
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-body',
-  weight: ['400', '500', '700'],
+  variable: '--font-geist',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 type Props = {
@@ -94,7 +88,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={safeLocale} className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+    <html lang={safeLocale} className={`${geist.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -109,7 +103,13 @@ export default async function LocaleLayout({ children, params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <a href="#main-content" className="skip-link">
+          {safeLocale === 'ro' ? 'Sari la conținut' : 'Skip to content'}
+        </a>
+        <div className="noise-overlay" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   )
 }

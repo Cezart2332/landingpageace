@@ -16,6 +16,8 @@ export type Translations = {
     companyNav: string
     switchToRo: string
     switchToEn: string
+    prevProject: string
+    nextProject: string
   }
   nav: {
     solutions: string
@@ -103,6 +105,8 @@ export type Translations = {
     company: string
     clients: string
     rights: string
+    privacyPolicy: string
+    termsOfService: string
   }
   portfolio: {
     label: string
@@ -123,9 +127,9 @@ export type Translations = {
 
 const ro: Translations = {
   meta: {
-    title: 'ACE Technologies — Soluții software',
+    title: 'ACE Technologies - Soluții software',
     description:
-      'ACE Technologies — software personalizat, platforme cloud, integrări și automatizare pentru echipe în creștere.',
+      'ACE Technologies - software personalizat, platforme cloud, integrări și automatizare pentru echipe în creștere.',
   },
   a11y: {
     mainNav: 'Navigare principală',
@@ -138,6 +142,8 @@ const ro: Translations = {
     companyNav: 'Companie',
     switchToRo: 'Română',
     switchToEn: 'English',
+    prevProject: 'Proiectul anterior',
+    nextProject: 'Proiectul următor',
   },
   nav: {
     solutions: 'Soluții',
@@ -152,7 +158,7 @@ const ro: Translations = {
     badge: 'ACE Technologies',
     rotating: ['Web Design', 'Web Development', 'Native App Development'],
     headline: ['Software', 'care', 'îți', 'propulsează', 'afacerea', 'înainte'],
-    sub: 'ACE Technologies proiectează, construiește și livrează software personalizat — de la platforme cloud la integrări care conectează întregul tău stack.',
+    sub: 'ACE Technologies proiectează, construiește și livrează software personalizat, de la platforme cloud la integrări care conectează întregul tău stack.',
     ctaPrimary: 'Programează un call de descoperire',
     ctaSecondary: 'Vezi soluțiile',
   },
@@ -203,17 +209,17 @@ const ro: Translations = {
     label: 'De ce ACE Technologies',
     title: 'Parteneriat, nu doar cod',
     description:
-      'Lucrăm ca o extensie a echipei tale — transparenți, receptivi și concentrați pe rezultate care contează pentru business-ul tău.',
+      'Lucrăm ca o extensie a echipei tale: transparenți, receptivi și concentrați pe rezultate care contează pentru business-ul tău.',
     items: [
       {
         title: 'Livrare rapidă',
         description:
-          'Cicluri de livrare agile și milestone-uri clare — vezi progres în fiecare săptămână, nu peste luni.',
+          'Cicluri de livrare agile și milestone-uri clare, ca să vezi progres în fiecare săptămână, nu peste luni.',
       },
       {
         title: 'Construit pentru durată',
         description:
-          'Securitate, testare și arhitectură mentenabilă fac parte din fiecare build — nu sunt un gând ulterior.',
+          'Securitate, testare și arhitectură mentenabilă fac parte din fiecare build, nu ca un gând ulterior.',
       },
       {
         title: 'Claritate full-stack',
@@ -226,12 +232,12 @@ const ro: Translations = {
     label: 'Cum lucrăm',
     title: 'Un proces construit pentru claritate',
     description:
-      'Fără cutii negre. Ai vizibilitate în fiecare etapă — de la descoperire la producție.',
+      'Fără cutii negre. Ai vizibilitate în fiecare etapă: de la descoperire la producție.',
     items: [
       {
         title: 'Descoperire',
         description:
-          'Cartografiem obiectivele, utilizatorii și constrângerile — apoi definim un roadmap și un scope clar.',
+          'Cartografiem obiectivele, utilizatorii și constrângerile, iar apoi definim un roadmap și un scope clar.',
       },
       {
         title: 'Construcție',
@@ -282,7 +288,7 @@ const ro: Translations = {
     items: [
       {
         q: 'Ce tipuri de proiecte preluați?',
-        a: 'Construim aplicații web personalizate, platforme SaaS, integrări și sisteme de automatizare — de la MVP-uri greenfield la modernizarea sistemelor legacy.',
+        a: 'Construim aplicații web personalizate, platforme SaaS, integrări și sisteme de automatizare, de la MVP-uri greenfield la modernizarea sistemelor legacy.',
       },
       {
         q: 'Cât durează un proiect tipic?',
@@ -294,14 +300,14 @@ const ro: Translations = {
       },
       {
         q: 'Ce tehnologii folosiți?',
-        a: 'Alegem stack-ul per proiect — frecvent React, TypeScript, Node, servicii cloud-native pe AWS sau Azure și pattern-uri API validate.',
+        a: 'Alegem stack-ul per proiect, frecvent React, TypeScript, Node, servicii cloud-native pe AWS sau Azure și pattern-uri API validate.',
       },
     ],
   },
   cta: {
     title: 'Hai să transformăm ideea ta în software de producție',
     description:
-      'Programează un call de descoperire gratuit. Conturăm scope, timeline și abordarea potrivită — fără obligații.',
+      'Programează un call de descoperire gratuit. Conturăm scope, timeline și abordarea potrivită, fără obligații.',
     button: 'Începe un proiect',
   },
   contact: {
@@ -330,6 +336,8 @@ const ro: Translations = {
     company: 'Companie',
     clients: 'Clienți',
     rights: 'Toate drepturile rezervate.',
+    privacyPolicy: 'Politică de Confidențialitate',
+    termsOfService: 'Termeni și Condiții',
   },
   portfolio: {
     label: 'Portofoliu',
@@ -357,9 +365,9 @@ const ro: Translations = {
 
 const en: Translations = {
   meta: {
-    title: 'ACE Technologies — Software Solutions',
+    title: 'ACE Technologies - Software Solutions',
     description:
-      'ACE Technologies — custom software, cloud platforms, integrations, and automation for growing teams.',
+      'ACE Technologies - custom software, cloud platforms, integrations, and automation for growing teams.',
   },
   a11y: {
     mainNav: 'Main navigation',
@@ -372,6 +380,8 @@ const en: Translations = {
     companyNav: 'Company',
     switchToRo: 'Română',
     switchToEn: 'English',
+    prevProject: 'Previous project',
+    nextProject: 'Next project',
   },
   nav: {
     solutions: 'Solutions',
@@ -386,7 +396,7 @@ const en: Translations = {
     badge: 'ACE Technologies',
     rotating: ['Web Design', 'Web Development', 'Native App Development'],
     headline: ['Software', 'that', 'moves', 'your', 'business', 'forward'],
-    sub: 'ACE Technologies designs, builds, and ships custom software—from cloud platforms to integrations that connect your entire stack.',
+    sub: 'ACE Technologies designs, builds, and ships custom software, from cloud platforms to integrations that connect your entire stack.',
     ctaPrimary: 'Book a discovery call',
     ctaSecondary: 'View solutions',
   },
@@ -437,17 +447,17 @@ const en: Translations = {
     label: 'Why ACE Technologies',
     title: 'Partnership, not just code',
     description:
-      'We work as an extension of your team—transparent, responsive, and focused on outcomes that matter to your business.',
+      'We work as an extension of your team: transparent, responsive, and focused on outcomes that matter to your business.',
     items: [
       {
         title: 'Ship faster',
         description:
-          'Lean delivery cycles and clear milestones so you see progress every week—not months from now.',
+          'Lean delivery cycles and clear milestones so you see progress every week, not months from now.',
       },
       {
         title: 'Built to last',
         description:
-          'Security, testing, and maintainable architecture are part of every build—not an afterthought.',
+          'Security, testing, and maintainable architecture are part of every build, not an afterthought.',
       },
       {
         title: 'Full-stack clarity',
@@ -460,12 +470,12 @@ const en: Translations = {
     label: 'How we work',
     title: 'A process built for clarity',
     description:
-      'No black boxes. You get visibility at every stage—from discovery to production.',
+      'No black boxes. You get visibility at every stage, from discovery to production.',
     items: [
       {
         title: 'Discover',
         description:
-          'We map your goals, users, and constraints—then define a clear roadmap and scope.',
+          'We map your goals, users, and constraints, then define a clear roadmap and scope.',
       },
       {
         title: 'Build',
@@ -516,7 +526,7 @@ const en: Translations = {
     items: [
       {
         q: 'What types of projects do you take on?',
-        a: 'We build custom web apps, SaaS platforms, integrations, and automation systems—from greenfield MVPs to modernizing legacy systems.',
+        a: 'We build custom web apps, SaaS platforms, integrations, and automation systems, from greenfield MVPs to modernizing legacy systems.',
       },
       {
         q: 'How long does a typical project take?',
@@ -528,14 +538,14 @@ const en: Translations = {
       },
       {
         q: 'What technologies do you use?',
-        a: 'We choose the stack per project—commonly React, TypeScript, Node, cloud-native services on AWS or Azure, and proven API patterns.',
+        a: 'We choose the stack per project, commonly React, TypeScript, Node, cloud-native services on AWS or Azure, and proven API patterns.',
       },
     ],
   },
   cta: {
     title: "Let's turn your idea into production software",
     description:
-      "Book a free discovery call. We'll outline scope, timeline, and the right approach—no obligation.",
+      "Book a free discovery call. We'll outline scope, timeline, and the right approach, with no obligation.",
     button: 'Start a project',
   },
   contact: {
@@ -564,6 +574,8 @@ const en: Translations = {
     company: 'Company',
     clients: 'Clients',
     rights: 'All rights reserved.',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
   },
   portfolio: {
     label: 'Portfolio',

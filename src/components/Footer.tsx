@@ -37,6 +37,11 @@ export default function Footer({ footer, nav, a11y }: Props) {
         <p className="footer-copy">
           &copy; {year} ACE Technologies. {footer.rights}
         </p>
+        <div className="footer-legal">
+          <a href="#privacy">{footer.privacyPolicy}</a>
+          <span className="footer-legal-dot" aria-hidden="true"> · </span>
+          <a href="#terms">{footer.termsOfService}</a>
+        </div>
       </div>
     </footer>
   )

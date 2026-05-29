@@ -6,6 +6,8 @@ import type { Translations } from '@/i18n/translations'
 
 type Props = {
   portfolio: Translations['portfolio']
+  prevLabel: string
+  nextLabel: string
 }
 
 /* One full rotation = 25 s. Step = 25s / n cards. */
@@ -15,7 +17,7 @@ function easeInOut(t: number): number {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
 }
 
-export default function PortfolioSection({ portfolio }: Props) {
+export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Props) {
   const trackRef = useRef<HTMLUListElement>(null)
   const animRef = useRef<Animation | null>(null)
   const navRafRef = useRef<number>(0)
@@ -98,7 +100,7 @@ export default function PortfolioSection({ portfolio }: Props) {
         <button
           type="button"
           className="portfolio-nav prev"
-          aria-label="Proiectul anterior"
+          aria-label={prevLabel}
           onClick={() => navigate('prev')}
         >
           <ChevronLeft size={20} aria-hidden="true" />
@@ -134,7 +136,7 @@ export default function PortfolioSection({ portfolio }: Props) {
         <button
           type="button"
           className="portfolio-nav next"
-          aria-label="Proiectul următor"
+          aria-label={nextLabel}
           onClick={() => navigate('next')}
         >
           <ChevronRight size={20} aria-hidden="true" />

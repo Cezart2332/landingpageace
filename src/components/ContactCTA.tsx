@@ -13,27 +13,65 @@ type Props = {
 export default function ContactCTA({ contact }: Props) {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<{ name?: boolean; email?: boolean; message?: boolean }>({})
+
+  const validateField = (name: string, value: string) => {
+    if (name === 'name') {
+      return !value.trim()
+    }
+    if (name === 'email') {
+      const email = value.trim()
+      return !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    }
+    if (name === 'message') {
+      return !value.trim()
+    }
+    return false
+  }
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    const hasError = validateField(name, value)
+    setFieldErrors((prev) => ({ ...prev, [name]: hasError }))
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    if (fieldErrors[name as keyof typeof fieldErrors]) {
+      const hasError = validateField(name, value)
+      setFieldErrors((prev) => ({ ...prev, [name]: hasError }))
+    }
+  }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')
     const form = e.currentTarget
     const data = new FormData(form)
-    const name = (data.get('name') as string)?.trim()
-    const email = (data.get('email') as string)?.trim()
-    const message = (data.get('message') as string)?.trim()
+    const nameVal = (data.get('name') as string) ?? ''
+    const emailVal = (data.get('email') as string) ?? ''
+    const messageVal = (data.get('message') as string) ?? ''
 
-    if (!name || !email || !message) {
-      setError(contact.errorRequired)
-      return
+    const errors = {
+      name: validateField('name', nameVal),
+      email: validateField('email', emailVal),
+      message: validateField('message', messageVal),
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError(contact.errorEmail)
+
+    setFieldErrors(errors)
+
+    if (errors.name || errors.email || errors.message) {
+      if (!nameVal.trim() || !emailVal.trim() || !messageVal.trim()) {
+        setError(contact.errorRequired)
+      } else {
+        setError(contact.errorEmail)
+      }
       return
     }
 
     setSubmitted(true)
     form.reset()
+    setFieldErrors({})
   }
 
   return (
@@ -91,6 +129,9 @@ export default function ContactCTA({ contact }: Props) {
                     autoComplete="name"
                     required
                     placeholder={contact.placeholderName}
+                    className={fieldErrors.name ? 'input-error' : ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="form-row">
@@ -102,6 +143,9 @@ export default function ContactCTA({ contact }: Props) {
                     autoComplete="email"
                     required
                     placeholder={contact.placeholderEmail}
+                    className={fieldErrors.email ? 'input-error' : ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="form-row">
@@ -112,6 +156,9 @@ export default function ContactCTA({ contact }: Props) {
                     rows={5}
                     required
                     placeholder={contact.placeholderMessage}
+                    className={fieldErrors.message ? 'input-error' : ''}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                   />
                 </div>
                 {error && (

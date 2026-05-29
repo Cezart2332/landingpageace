@@ -64,14 +64,18 @@ export default function LandingPage({ locale, t }: LandingPageProps) {
 
       <div className="ui-layer">
         <Navbar locale={locale} t={t} />
-        <main className="site-main">
+        <main id="main-content" className="site-main">
           <div className="over-canvas">
             <HeroSection hero={t.hero} />
             <StatsBand stats={t.stats} a11yLabel={t.a11y.metrics} />
           </div>
           <MarqueeStrip marquee={t.marquee} />
           <TrustBar label={t.trust.label} a11yLabel={t.a11y.companies} />
-          <PortfolioSection portfolio={t.portfolio} />
+          <PortfolioSection
+            portfolio={t.portfolio}
+            prevLabel={t.a11y.prevProject}
+            nextLabel={t.a11y.nextProject}
+          />
           <SolutionsGrid solutions={t.solutions} />
           <WhyUs why={t.why} />
           <ProcessSteps process={t.process} />

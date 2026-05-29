@@ -29,7 +29,7 @@ export default function Navbar({ t }: Props) {
       <nav className="navbar-inner" aria-label={t.a11y.mainNav}>
 
         {/* ─── Brand block (left) ──────────────────────── */}
-        <a href="#hero" className="navbar-brand" aria-label="Ace Solutions — home">
+        <a href="#hero" className="navbar-brand" aria-label="Ace Solutions - home">
           <span className="navbar-brand-name">
             <span className="navbar-brand-ace">ACE</span>
             <span className="navbar-brand-dot"> · </span>

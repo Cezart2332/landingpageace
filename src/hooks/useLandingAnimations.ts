@@ -321,13 +321,26 @@ export function useLandingAnimations(
           },
         })
 
-        /* ─── Card hover tilt ─────────────────────────────────── */
-        const tiltCards = root.querySelectorAll<HTMLElement>('[data-tilt-card]')
+        /* ─── Card hover spotlight & dynamic elevate ─────────── */
+        const cards = root.querySelectorAll<HTMLElement>(
+          '.solution-card, .pillar-card, .process-card'
+        )
+
+        const onCardMouseMove = (e: MouseEvent) => {
+          const card = e.currentTarget as HTMLElement
+          const rect = card.getBoundingClientRect()
+          const x = e.clientX - rect.left
+          const y = e.clientY - rect.top
+          card.style.setProperty('--mouse-x', `${x}px`)
+          card.style.setProperty('--mouse-y', `${y}px`)
+        }
+
         const onEnter = (e: Event) => {
           const card = e.currentTarget as HTMLElement
           gsap.to(card, {
             y: -8,
-            boxShadow: '0 16px 40px rgba(245, 158, 11, 0.15)',
+            boxShadow: '0 16px 36px rgba(37, 99, 235, 0.12), var(--shadow-tinted)',
+            borderColor: 'var(--color-accent-border)',
             duration: 0.35,
             ease: 'power2.out',
           })
@@ -336,12 +349,15 @@ export function useLandingAnimations(
           const card = e.currentTarget as HTMLElement
           gsap.to(card, {
             y: 0,
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
+            boxShadow: 'var(--shadow-tinted)',
+            borderColor: 'var(--color-border)',
             duration: 0.35,
             ease: 'power2.out',
           })
         }
-        tiltCards.forEach((card) => {
+
+        cards.forEach((card) => {
+          card.addEventListener('mousemove', onCardMouseMove)
           card.addEventListener('mouseenter', onEnter)
           card.addEventListener('mouseleave', onLeave)
         })
@@ -361,7 +377,8 @@ export function useLandingAnimations(
         return () => {
           window.clearTimeout(delayedSyncId)
           ScrollTrigger.removeEventListener('scrollEnd', onScrollSync)
-          tiltCards.forEach((card) => {
+          cards.forEach((card) => {
+            card.removeEventListener('mousemove', onCardMouseMove)
             card.removeEventListener('mouseenter', onEnter)
             card.removeEventListener('mouseleave', onLeave)
           })
