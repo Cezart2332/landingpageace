@@ -1,42 +1,31 @@
-import { useState } from 'react'
+'use client'
+
+import { useEffect, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
 import SectionHeader from './SectionHeader'
-
-const faqs = [
-  {
-    q: 'What types of projects do you take on?',
-    a: 'We build custom web apps, SaaS platforms, integrations, and automation systems—from greenfield MVPs to modernizing legacy systems.',
-  },
-  {
-    q: 'How long does a typical project take?',
-    a: 'MVPs often ship in 8–14 weeks. Larger platforms are delivered in phased milestones so you get value early and often.',
-  },
-  {
-    q: 'Do you work with existing teams?',
-    a: 'Yes. We embed alongside your engineers and designers, or operate as a standalone squad depending on what you need.',
-  },
-  {
-    q: 'What technologies do you use?',
-    a: 'We choose the stack per project—commonly React, TypeScript, Node, cloud-native services on AWS or Azure, and proven API patterns.',
-  },
-]
+import { useLanguage } from '@/i18n/LanguageProvider'
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { t, locale } = useLanguage()
+
+  useEffect(() => {
+    setOpenIndex(null)
+  }, [locale])
 
   return (
     <section id="faq" className="section section-solid">
       <div className="container container-narrow">
         <SectionHeader
-          label="FAQ"
-          title="Common questions"
-          description="Quick answers before you reach out. We're happy to go deeper on a discovery call."
+          label={t.faq.label}
+          title={t.faq.title}
+          description={t.faq.description}
         />
         <ul className="faq-list" data-reveal-stagger>
-          {faqs.map((item, index) => {
+          {t.faq.items.map((item, index) => {
             const isOpen = openIndex === index
             return (
-              <li key={item.q} className="faq-item" data-reveal-child>
+              <li key={index} className="faq-item" data-reveal-child>
                 <button
                   type="button"
                   className="faq-question"

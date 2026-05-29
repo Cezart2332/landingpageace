@@ -1,18 +1,19 @@
+'use client'
+
+import { useLanguage } from '@/i18n/LanguageProvider'
+
 export default function CtaBanner() {
+  const { t } = useLanguage()
+
   return (
     <section className="cta-banner" data-reveal>
       <div className="container cta-banner-inner">
         <div className="cta-banner-copy">
-          <h2 className="cta-banner-title">
-            Let&apos;s turn your idea into production software
-          </h2>
-          <p className="cta-banner-desc">
-            Book a free discovery call. We&apos;ll outline scope, timeline, and
-            the right approach—no obligation.
-          </p>
+          <h2 className="cta-banner-title">{t.cta.title}</h2>
+          <p className="cta-banner-desc">{t.cta.description}</p>
         </div>
         <a href="#contact" className="btn btn-primary btn-lg">
-          Start a project
+          {t.cta.button}
         </a>
       </div>
     </section>

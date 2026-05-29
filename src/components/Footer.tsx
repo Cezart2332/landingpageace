@@ -1,5 +1,10 @@
+'use client'
+
+import { useLanguage } from '@/i18n/LanguageProvider'
+
 export default function Footer() {
   const year = new Date().getFullYear()
+  const { t } = useLanguage()
 
   return (
     <footer className="footer">
@@ -9,28 +14,25 @@ export default function Footer() {
             <span className="logo-mark">ACE</span>
             <span className="logo-text">Technologies</span>
           </a>
-          <p className="footer-tagline">
-            Custom software, cloud platforms, and integrations for teams that
-            need to move fast without cutting corners.
-          </p>
+          <p className="footer-tagline">{t.footer.tagline}</p>
         </div>
-        <nav className="footer-col" aria-label="Site">
-          <h3 className="footer-col-title">Site</h3>
-          <a href="#solutions">Solutions</a>
-          <a href="#why">Why us</a>
-          <a href="#process">Process</a>
-          <a href="#faq">FAQ</a>
+        <nav className="footer-col" aria-label={t.a11y.siteNav}>
+          <h3 className="footer-col-title">{t.footer.site}</h3>
+          <a href="#solutions">{t.nav.solutions}</a>
+          <a href="#why">{t.nav.why}</a>
+          <a href="#process">{t.nav.process}</a>
+          <a href="#faq">{t.nav.faq}</a>
         </nav>
-        <nav className="footer-col" aria-label="Company">
-          <h3 className="footer-col-title">Company</h3>
-          <a href="#testimonials">Clients</a>
-          <a href="#contact">Contact</a>
+        <nav className="footer-col" aria-label={t.a11y.companyNav}>
+          <h3 className="footer-col-title">{t.footer.company}</h3>
+          <a href="#testimonials">{t.footer.clients}</a>
+          <a href="#contact">{t.nav.contact}</a>
           <a href="mailto:hello@acesolutions.com">hello@acesolutions.com</a>
         </nav>
       </div>
       <div className="container footer-bottom">
         <p className="footer-copy">
-          &copy; {year} ACE Technologies. All rights reserved.
+          &copy; {year} ACE Technologies. {t.footer.rights}
         </p>
       </div>
     </footer>

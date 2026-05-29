@@ -1,26 +1,35 @@
+'use client'
+
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
-
-const links = [
-  { href: '#solutions', label: 'Solutions' },
-  { href: '#why', label: 'Why us' },
-  { href: '#process', label: 'Process' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#contact', label: 'Contact' },
-]
+import LanguageSwitch from './LanguageSwitch'
+import { useLanguage } from '@/i18n/LanguageProvider'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const { t } = useLanguage()
+
+  const links = [
+    { href: '#solutions', label: t.nav.solutions },
+    { href: '#why', label: t.nav.why },
+    { href: '#process', label: t.nav.process },
+    { href: '#faq', label: t.nav.faq },
+    { href: '#contact', label: t.nav.contact },
+  ]
 
   return (
     <header className="navbar" data-animate="nav">
-      <nav className="navbar-inner" aria-label="Main navigation">
+      <nav className="navbar-inner" aria-label={t.a11y.mainNav}>
+        <div className="navbar-lang-slot">
+          <LanguageSwitch />
+        </div>
+
         <button
           type="button"
           className="navbar-toggle"
           aria-expanded={open}
           aria-controls="nav-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
           onClick={() => setOpen(!open)}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
@@ -44,7 +53,7 @@ export default function Navbar() {
             ))}
           </ul>
           <a href="#contact" className="btn btn-primary navbar-cta">
-            Book a call
+            {t.nav.bookCall}
           </a>
         </div>
       </nav>

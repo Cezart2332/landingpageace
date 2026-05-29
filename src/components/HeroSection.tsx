@@ -1,12 +1,15 @@
-const headlineWords = ['Software', 'that', 'moves', 'your', 'business', 'forward']
+'use client'
 
-function HeroSection() {
+import { useLanguage } from '@/i18n/LanguageProvider'
+
+export default function HeroSection() {
+  const { t } = useLanguage()
+  const headlineWords = t.hero.headline
+
   return (
     <section className="hero" id="hero">
       <div className="hero-content">
-        <span className="hero-badge hero-reveal">
-          Software solutions for growing teams
-        </span>
+        <span className="hero-badge hero-reveal">{t.hero.badge}</span>
         <h1 className="hero-title">
           {headlineWords.map((word, i) => (
             <span
@@ -17,21 +20,16 @@ function HeroSection() {
             </span>
           ))}
         </h1>
-        <p className="hero-sub hero-reveal">
-          ACE Technologies designs, builds, and ships custom software—from cloud
-          platforms to integrations that connect your entire stack.
-        </p>
+        <p className="hero-sub hero-reveal">{t.hero.sub}</p>
         <div className="hero-actions hero-reveal">
           <a href="#contact" className="btn btn-primary">
-            Book a discovery call
+            {t.hero.ctaPrimary}
           </a>
           <a href="#solutions" className="btn btn-secondary">
-            View solutions
+            {t.hero.ctaSecondary}
           </a>
         </div>
       </div>
     </section>
   )
 }
-
-export default HeroSection

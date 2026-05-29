@@ -15,9 +15,9 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'ACE Technologies — Software Solutions',
+  title: 'ACE Technologies — Soluții software',
   description:
-    'ACE Technologies — custom software, cloud platforms, integrations, and automation for growing teams.',
+    'ACE Technologies — software personalizat, platforme cloud, integrări și automatizare pentru echipe în creștere.',
   icons: {
     icon: '/favicon.svg',
   },
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+    <html lang="ro" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
       <body>{children}</body>
     </html>
   )

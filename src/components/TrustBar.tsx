@@ -1,3 +1,7 @@
+'use client'
+
+import { useLanguage } from '@/i18n/LanguageProvider'
+
 const partners = [
   'Northline',
   'Finova',
@@ -8,11 +12,13 @@ const partners = [
 ]
 
 export default function TrustBar() {
+  const { t } = useLanguage()
+
   return (
-    <section className="trust-bar section-solid" aria-label="Companies we work with">
+    <section className="trust-bar section-solid" aria-label={t.a11y.companies}>
       <div className="container">
         <p className="trust-label" data-reveal>
-          Trusted by teams building modern software
+          {t.trust.label}
         </p>
         <ul className="trust-logos" data-reveal-stagger>
           {partners.map((name) => (

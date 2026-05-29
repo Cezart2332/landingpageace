@@ -172,13 +172,13 @@ a {
   right: 0;
   z-index: 100;
   width: 100%;
+  pointer-events: auto;
 }
 
 .navbar-inner {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: var(--space-md);
   width: 100%;
   padding: 0.875rem var(--space-md);
@@ -195,6 +195,7 @@ a {
 
 @media (min-width: 768px) {
   .navbar-inner {
+    gap: var(--space-lg);
     padding: 0.875rem var(--space-lg);
   }
 }
@@ -205,8 +206,16 @@ a {
   box-shadow: var(--shadow-md);
 }
 
+.navbar-lang-slot {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  order: 0;
+}
+
 .navbar-toggle {
-  margin-right: auto;
+  order: 1;
+  margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,11 +235,7 @@ a {
 @media (min-width: 768px) {
   .navbar-toggle {
     display: none;
-    margin-right: 0;
-  }
-
-  .navbar-inner {
-    justify-content: flex-end;
+    margin-left: 0;
   }
 }
 
@@ -257,9 +262,12 @@ a {
 @media (min-width: 768px) {
   .navbar-menu {
     display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
     position: static;
+    order: 2;
     padding: 0;
     background: none;
     border: none;
@@ -292,7 +300,15 @@ a {
   color: var(--color-text);
   border-radius: var(--radius-sm);
   cursor: pointer;
+  white-space: nowrap;
   transition: color var(--transition), background-color var(--transition);
+}
+
+@media (min-width: 768px) {
+  .navbar-links li {
+    min-width: 6.25rem;
+    text-align: center;
+  }
 }
 
 .navbar-link:hover {
@@ -307,6 +323,54 @@ a {
 
 .navbar-cta {
   white-space: nowrap;
+  min-width: 12.5rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.lang-switch {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 4.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-bg);
+  pointer-events: auto;
+}
+
+.lang-switch-btn {
+  flex: 1 1 50%;
+  min-width: 0;
+  padding: 0.4rem 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+}
+
+.lang-switch-btn:hover {
+  color: var(--color-primary);
+}
+
+.lang-switch-btn.is-active {
+  color: #fff;
+  background: var(--color-primary);
+}
+
+.lang-switch-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 /* Three.js fills the scene layer */
