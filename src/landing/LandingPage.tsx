@@ -9,8 +9,10 @@ import type { Locale } from '@/i18n/types'
 import type { Translations } from '@/i18n/translations'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
+import MarqueeStrip from '@/components/MarqueeStrip'
 import StatsBand from '@/components/StatsBand'
 import TrustBar from '@/components/TrustBar'
+import PortfolioSection from '@/components/PortfolioSection'
 import SolutionsGrid from '@/components/SolutionsGrid'
 import WhyUs from '@/components/WhyUs'
 import ProcessSteps from '@/components/ProcessSteps'
@@ -52,6 +54,8 @@ export default function LandingPage({ locale, t }: LandingPageProps) {
 
   return (
     <div ref={pageRef} className={`landing ${ready ? 'is-ready' : ''}`}>
+      <div className="cursor-glow" aria-hidden="true" />
+
       <div className="scene-layer" aria-hidden="true">
         <PageCanvas />
       </div>
@@ -63,7 +67,9 @@ export default function LandingPage({ locale, t }: LandingPageProps) {
             <HeroSection hero={t.hero} />
             <StatsBand stats={t.stats} a11yLabel={t.a11y.metrics} />
           </div>
+          <MarqueeStrip marquee={t.marquee} />
           <TrustBar label={t.trust.label} a11yLabel={t.a11y.companies} />
+          <PortfolioSection portfolio={t.portfolio} />
           <SolutionsGrid solutions={t.solutions} />
           <WhyUs why={t.why} />
           <ProcessSteps process={t.process} />

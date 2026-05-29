@@ -1,35 +1,60 @@
 :root {
-  --color-primary: #0ea5e9;
-  --color-primary-dark: #0284c7;
-  --color-secondary: #38bdf8;
-  --color-bg: #ffffff;
-  --color-bg-soft: #f0f9ff;
-  --color-bg-muted: #e0f2fe;
-  --color-text: #0c4a6e;
-  --color-text-heading: #0f172a;
-  --color-text-muted: #475569;
-  --color-border: #e0f2fe;
-  --color-border-hover: #7dd3fc;
+  /* ─── Accent ─────────────────────────────────────────────── */
+  --color-accent:        #f59e0b;
+  --color-accent-light:  #fbbf24;
+  --color-accent-dark:   #d97706;
+  --color-accent-glow:   rgba(245, 158, 11, 0.18);
+  --color-accent-border: rgba(245, 158, 11, 0.35);
 
-  /* --font-heading and --font-body are set on <html> via next/font in app/layout.tsx */
+  /* ─── Legacy aliases (used in existing CSS) ──────────────── */
+  --color-primary:       #f59e0b;
+  --color-primary-dark:  #d97706;
+  --color-secondary:     #fbbf24;
 
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* ─── Backgrounds ────────────────────────────────────────── */
+  --color-bg:            #09090e;
+  --color-bg-soft:       #0f1117;
+  --color-bg-muted:      #13161f;
+  --color-bg-card:       #111520;
+  --color-bg-elevated:   #181d2a;
 
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
+  /* ─── Text ───────────────────────────────────────────────── */
+  --color-text:          #cbd5e1;
+  --color-text-heading:  #f8fafc;
+  --color-text-muted:    #64748b;
+
+  /* ─── Borders ────────────────────────────────────────────── */
+  --color-border:        rgba(255, 255, 255, 0.07);
+  --color-border-hover:  rgba(245, 158, 11, 0.35);
+
+  /* ─── Typography (fonts set on <html> via next/font) ─────── */
+
+  /* ─── Radii ──────────────────────────────────────────────── */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+
+  /* ─── Spacing ────────────────────────────────────────────── */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
   --space-2xl: 5rem;
   --space-3xl: 7rem;
 
-  --max-width: 1200px;
+  /* ─── Layout ─────────────────────────────────────────────── */
+  --max-width:  1200px;
   --nav-height: 72px;
+
+  /* ─── Motion ─────────────────────────────────────────────── */
   --transition: 200ms ease;
-  --shadow-sm: 0 1px 3px rgba(14, 165, 233, 0.08);
-  --shadow-md: 0 8px 24px rgba(14, 165, 233, 0.12);
-  --focus-ring: 0 0 0 3px rgba(14, 165, 233, 0.35);
+
+  /* ─── Shadows ────────────────────────────────────────────── */
+  --shadow-sm:     0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md:     0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg:     0 16px 48px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 0 32px rgba(245, 158, 11, 0.15);
+  --focus-ring:    0 0 0 3px rgba(245, 158, 11, 0.4);
 }

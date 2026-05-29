@@ -10,7 +10,7 @@ export default function HeroScene() {
     if (!container) return
 
     const scene = new THREE.Scene()
-    scene.fog = new THREE.FogExp2(0xf0f9ff, 0.035)
+    scene.fog = new THREE.FogExp2(0x09090e, 0.028)
 
     const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100)
     camera.position.set(0, 0, 6)
@@ -27,8 +27,8 @@ export default function HeroScene() {
     const particleCount = 2200
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
-    const c1 = new THREE.Color(0x0ea5e9)
-    const c2 = new THREE.Color(0x38bdf8)
+    const c1 = new THREE.Color(0xf59e0b)
+    const c2 = new THREE.Color(0xfbbf24)
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
@@ -55,7 +55,7 @@ export default function HeroScene() {
         size: 0.065,
         vertexColors: true,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.85,
         sizeAttenuation: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
@@ -66,10 +66,10 @@ export default function HeroScene() {
     const core = new THREE.Mesh(
       new THREE.IcosahedronGeometry(1.7, 2),
       new THREE.MeshBasicMaterial({
-        color: 0x0ea5e9,
+        color: 0xf59e0b,
         wireframe: true,
         transparent: true,
-        opacity: 1,
+        opacity: 0.9,
       }),
     )
     scene.add(core)
@@ -77,9 +77,9 @@ export default function HeroScene() {
     const innerGlow = new THREE.Mesh(
       new THREE.SphereGeometry(0.9, 32, 32),
       new THREE.MeshBasicMaterial({
-        color: 0x38bdf8,
+        color: 0xd97706,
         transparent: true,
-        opacity: 0.35,
+        opacity: 0.2,
       }),
     )
     scene.add(innerGlow)
@@ -87,9 +87,9 @@ export default function HeroScene() {
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(2.6, 0.04, 16, 100),
       new THREE.MeshBasicMaterial({
-        color: 0x0284c7,
+        color: 0xf59e0b,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.6,
       }),
     )
     ring.rotation.x = Math.PI / 3
@@ -98,10 +98,10 @@ export default function HeroScene() {
     const outerRing = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.35, 0.2, 128, 20),
       new THREE.MeshBasicMaterial({
-        color: 0x7dd3fc,
+        color: 0xfde68a,
         wireframe: true,
         transparent: true,
-        opacity: 0.5,
+        opacity: 0.45,
       }),
     )
     scene.add(outerRing)

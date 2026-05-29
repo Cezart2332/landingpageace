@@ -102,6 +102,21 @@ export type Translations = {
     clients: string
     rights: string
   }
+  portfolio: {
+    label: string
+    title: string
+    viewAll: string
+    items: {
+      id: string
+      title: string
+      category: string
+      year: string
+      tag: string
+    }[]
+  }
+  marquee: {
+    items: string[]
+  }
 }
 
 const ro: Translations = {
@@ -312,6 +327,28 @@ const ro: Translations = {
     clients: 'Clienți',
     rights: 'Toate drepturile rezervate.',
   },
+  portfolio: {
+    label: 'Portofoliu',
+    title: 'Proiecte care vorbesc de la sine',
+    viewAll: 'Vezi toate proiectele',
+    items: [
+      { id: '01', title: 'Nexus Platform', category: 'SaaS', year: '2024', tag: 'Platformă web' },
+      { id: '02', title: 'FlowMetrics', category: 'Analytics', year: '2024', tag: 'Dashboard' },
+      { id: '03', title: 'VaultPay', category: 'Fintech', year: '2025', tag: 'Aplicație mobile' },
+      { id: '04', title: 'OriginCMS', category: 'Content Platform', year: '2025', tag: 'Platformă web' },
+      { id: '05', title: 'PulseOps', category: 'DevOps', year: '2025', tag: 'Tool intern' },
+    ],
+  },
+  marquee: {
+    items: [
+      'Software care propulsează',
+      'Design care impresionează',
+      'Deadline-uri respectate',
+      'Cod care durează',
+      'Clienți care revin',
+      'Soluții fără compromisuri',
+    ],
+  },
 }
 
 const en: Translations = {
@@ -521,6 +558,28 @@ const en: Translations = {
     company: 'Company',
     clients: 'Clients',
     rights: 'All rights reserved.',
+  },
+  portfolio: {
+    label: 'Portfolio',
+    title: 'Projects that speak for themselves',
+    viewAll: 'View all projects',
+    items: [
+      { id: '01', title: 'Nexus Platform', category: 'SaaS', year: '2024', tag: 'Web platform' },
+      { id: '02', title: 'FlowMetrics', category: 'Analytics', year: '2024', tag: 'Dashboard' },
+      { id: '03', title: 'VaultPay', category: 'Fintech', year: '2025', tag: 'Mobile app' },
+      { id: '04', title: 'OriginCMS', category: 'Content Platform', year: '2025', tag: 'Web platform' },
+      { id: '05', title: 'PulseOps', category: 'DevOps', year: '2025', tag: 'Internal tool' },
+    ],
+  },
+  marquee: {
+    items: [
+      'Software that scales',
+      'Design that impresses',
+      'Deadlines that stick',
+      'Code that lasts',
+      'Clients that return',
+      'Zero compromises',
+    ],
   },
 }
 
