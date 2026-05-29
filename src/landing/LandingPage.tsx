@@ -7,6 +7,7 @@ import { ScrollTrigger } from '@/gsap/setup'
 import { useLandingAnimations } from '@/hooks/useLandingAnimations'
 import type { Locale } from '@/i18n/types'
 import type { Translations } from '@/i18n/translations'
+import SmoothScroll from '@/components/SmoothScroll'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import MarqueeStrip from '@/components/MarqueeStrip'
@@ -54,6 +55,7 @@ export default function LandingPage({ locale, t }: LandingPageProps) {
 
   return (
     <div ref={pageRef} className={`landing ${ready ? 'is-ready' : ''}`}>
+      <SmoothScroll />
       <div className="cursor-glow" aria-hidden="true" />
 
       <div className="scene-layer" aria-hidden="true">

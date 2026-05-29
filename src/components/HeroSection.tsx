@@ -8,7 +8,6 @@ export default function HeroSection({ hero }: Props) {
   return (
     <section className="hero" id="hero">
       <div className="hero-content">
-        <span className="hero-badge hero-reveal">{hero.badge}</span>
         <h1 className="hero-title">
           {hero.headline.map((word, i) => (
             <span

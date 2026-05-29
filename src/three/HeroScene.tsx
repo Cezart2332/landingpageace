@@ -27,8 +27,8 @@ export default function HeroScene() {
     const particleCount = 2200
     const positions = new Float32Array(particleCount * 3)
     const colors = new Float32Array(particleCount * 3)
-    const c1 = new THREE.Color(0xf59e0b)
-    const c2 = new THREE.Color(0xfbbf24)
+    const c1 = new THREE.Color(0x10b981)
+    const c2 = new THREE.Color(0x34d399)
 
     for (let i = 0; i < particleCount; i++) {
       const i3 = i * 3
@@ -44,6 +44,9 @@ export default function HeroScene() {
       colors[i3 + 1] = col.g
       colors[i3 + 2] = col.b
     }
+
+    const originalPositions = new Float32Array(positions)
+    const velocities = new Float32Array(particleCount * 3)
 
     const particleGeometry = new THREE.BufferGeometry()
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -63,31 +66,10 @@ export default function HeroScene() {
     )
     scene.add(particles)
 
-    const core = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.7, 2),
-      new THREE.MeshBasicMaterial({
-        color: 0xf59e0b,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.9,
-      }),
-    )
-    scene.add(core)
-
-    const innerGlow = new THREE.Mesh(
-      new THREE.SphereGeometry(0.9, 32, 32),
-      new THREE.MeshBasicMaterial({
-        color: 0xd97706,
-        transparent: true,
-        opacity: 0.2,
-      }),
-    )
-    scene.add(innerGlow)
-
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(2.6, 0.04, 16, 100),
       new THREE.MeshBasicMaterial({
-        color: 0xf59e0b,
+        color: 0x10b981,
         transparent: true,
         opacity: 0.6,
       }),
@@ -98,7 +80,7 @@ export default function HeroScene() {
     const outerRing = new THREE.Mesh(
       new THREE.TorusKnotGeometry(1.35, 0.2, 128, 20),
       new THREE.MeshBasicMaterial({
-        color: 0xfde68a,
+        color: 0x6ee7b7,
         wireframe: true,
         transparent: true,
         opacity: 0.45,
@@ -107,12 +89,26 @@ export default function HeroScene() {
     scene.add(outerRing)
 
     const mouse = { x: 0, y: 0 }
+    let isHovered = false
     const onPointerMove = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect()
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1
       mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1
+      const inBounds =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      isHovered = inBounds
     }
-    container.addEventListener('pointermove', onPointerMove)
+    const onPointerLeave = () => { isHovered = false }
+    window.addEventListener('pointermove', onPointerMove, { passive: true })
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true })
+
+    const raycaster = new THREE.Raycaster()
+    const mouseVec2 = new THREE.Vector2()
+    const repulsionPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)
+    const mouseWorld = new THREE.Vector3()
 
     const resize = () => {
       const { width, height } = container.getBoundingClientRect()
@@ -131,12 +127,9 @@ export default function HeroScene() {
 
     const animate = () => {
       const t = clock.getElapsedTime()
-      const speed = reducedMotion ? 0.15 : 1
+      const speed = reducedMotion ? 0.08 : 0.25
       particles.rotation.y = t * 0.12 * speed
       particles.rotation.x = t * 0.04 * speed
-      core.rotation.y = t * 0.65 * speed
-      core.rotation.x = t * 0.3 * speed
-      innerGlow.scale.setScalar(1 + Math.sin(t * 2.2) * 0.08)
       ring.rotation.z = t * 0.45 * speed
       ring.rotation.y = t * 0.28 * speed
       outerRing.rotation.x = t * 0.5 * speed
@@ -145,6 +138,62 @@ export default function HeroScene() {
       if (!reducedMotion) {
         camera.position.x += (mouse.x * 1 - camera.position.x) * 0.05
         camera.position.y += (mouse.y * 0.6 - camera.position.y) * 0.05
+
+        if (isHovered) {
+          mouseVec2.set(mouse.x, mouse.y)
+          raycaster.setFromCamera(mouseVec2, camera)
+          const hit = raycaster.ray.intersectPlane(repulsionPlane, mouseWorld)
+          if (hit) {
+            const mouseLocal = particles.worldToLocal(mouseWorld.clone())
+            const R = 1.6, R2 = R * R, FORCE = 0.016, SPRING = 0.014, DAMP = 0.87
+            for (let i = 0; i < particleCount; i++) {
+              const i3 = i * 3
+              const dx = positions[i3]     - mouseLocal.x
+              const dy = positions[i3 + 1] - mouseLocal.y
+              const dz = positions[i3 + 2] - mouseLocal.z
+              const d2 = dx * dx + dy * dy + dz * dz
+              if (d2 < R2 && d2 > 0.0001) {
+                const d = Math.sqrt(d2)
+                // particles farther from scene centre get progressively less push
+                const ox = originalPositions[i3], oy = originalPositions[i3 + 1], oz = originalPositions[i3 + 2]
+                const origR = Math.sqrt(ox * ox + oy * oy + oz * oz)
+                const edgeFade = Math.max(0, 1 - (origR - 2) / 5)
+                const f = ((R - d) / R) * FORCE * edgeFade
+                velocities[i3]     += (dx / d) * f
+                velocities[i3 + 1] += (dy / d) * f
+                velocities[i3 + 2] += (dz / d) * f
+              }
+              velocities[i3]     += (originalPositions[i3]     - positions[i3])     * SPRING
+              velocities[i3 + 1] += (originalPositions[i3 + 1] - positions[i3 + 1]) * SPRING
+              velocities[i3 + 2] += (originalPositions[i3 + 2] - positions[i3 + 2]) * SPRING
+              velocities[i3]     *= DAMP
+              velocities[i3 + 1] *= DAMP
+              velocities[i3 + 2] *= DAMP
+              positions[i3]     += velocities[i3]
+              positions[i3 + 1] += velocities[i3 + 1]
+              positions[i3 + 2] += velocities[i3 + 2]
+            }
+            particleGeometry.attributes.position.needsUpdate = true
+          }
+        } else {
+          let anyActive = false
+          for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3
+            if (Math.abs(velocities[i3]) > 0.0001 || Math.abs(velocities[i3 + 1]) > 0.0001) {
+              anyActive = true
+              velocities[i3]     += (originalPositions[i3]     - positions[i3])     * 0.014
+              velocities[i3 + 1] += (originalPositions[i3 + 1] - positions[i3 + 1]) * 0.014
+              velocities[i3 + 2] += (originalPositions[i3 + 2] - positions[i3 + 2]) * 0.014
+              velocities[i3]     *= 0.87
+              velocities[i3 + 1] *= 0.87
+              velocities[i3 + 2] *= 0.87
+              positions[i3]     += velocities[i3]
+              positions[i3 + 1] += velocities[i3 + 1]
+              positions[i3 + 2] += velocities[i3 + 2]
+            }
+          }
+          if (anyActive) particleGeometry.attributes.position.needsUpdate = true
+        }
       }
       camera.lookAt(0, 0, 0)
       renderer.render(scene, camera)
@@ -156,14 +205,11 @@ export default function HeroScene() {
 
     return () => {
       cancelAnimationFrame(frameId)
-      container.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerleave', onPointerLeave)
       resizeObserver.disconnect()
       particleGeometry.dispose()
       particles.material.dispose()
-      core.geometry.dispose()
-      ;(core.material as THREE.Material).dispose()
-      innerGlow.geometry.dispose()
-      ;(innerGlow.material as THREE.Material).dispose()
       ring.geometry.dispose()
       ;(ring.material as THREE.Material).dispose()
       outerRing.geometry.dispose()

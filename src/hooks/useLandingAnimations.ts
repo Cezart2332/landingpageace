@@ -124,7 +124,7 @@ export function useLandingAnimations(
       const mm = gsap.matchMedia()
 
       mm.add('(prefers-reduced-motion: no-preference)', () => {
-        gsap.set('.scene-layer', { opacity: 1, clearProps: 'opacity' })
+        gsap.set('.scene-layer', { opacity: 1 })
         gsap.set(root.querySelectorAll('[data-reveal-child]'), {
           opacity: 0,
           y: 80,
@@ -159,7 +159,7 @@ export function useLandingAnimations(
           .from(
             '.hero-reveal',
             { opacity: 0, y: 28, duration: 0.6, stagger: 0.1 },
-            '-=0.55',
+            '-=0.4',
           )
           .from(
             '.hero-actions .btn',
@@ -183,6 +183,18 @@ export function useLandingAnimations(
             start: 'top top',
             end: 'bottom top',
             scrub: true,
+          },
+        })
+
+        /* ─── Scene fade: full opacity in hero → ambient in rest ── */
+        gsap.to('.scene-layer', {
+          opacity: 0.22,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'bottom 70%',
+            end: 'bottom top',
+            scrub: 1.5,
           },
         })
 

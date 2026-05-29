@@ -19,22 +19,50 @@ export default function ProcessSteps({ process }: Props) {
           title={process.title}
           description={process.description}
         />
-        <ol className="process-steps" data-reveal-stagger>
+
+        <div className="process-timeline" data-reveal-stagger>
           {process.items.map((item, index) => {
             const Icon = stepIcons[index]
             const step = stepNumbers[index]
+            const isLast = index === process.items.length - 1
+
             return (
-              <li key={step} className="process-card" data-reveal-child>
-                <span className="process-step">{step}</span>
-                <div className="process-icon" aria-hidden="true">
-                  <Icon size={32} strokeWidth={1.75} />
+              <div key={step} className="process-timeline-entry">
+                {/* ─── Step card ─────────────────────────────── */}
+                <div className="process-card" data-reveal-child data-tilt-card>
+                  <span className="process-step" aria-hidden="true">{step}</span>
+                  <div className="process-icon" aria-hidden="true">
+                    <Icon size={28} strokeWidth={1.75} />
+                  </div>
+                  <h3 className="process-title">{item.title}</h3>
+                  <p className="process-desc">{item.description}</p>
                 </div>
-                <h3 className="process-title">{item.title}</h3>
-                <p className="process-desc">{item.description}</p>
-              </li>
+
+                {/* ─── Connector arrow (not on last step) ──── */}
+                {!isLast && (
+                  <div className="process-connector" aria-hidden="true">
+                    <div className="process-connector-line" />
+                    <svg
+                      className="process-connector-arrow"
+                      width="10"
+                      height="16"
+                      viewBox="0 0 10 16"
+                      fill="none"
+                    >
+                      <path
+                        d="M1 1L9 8L1 15"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
             )
           })}
-        </ol>
+        </div>
       </div>
     </section>
   )

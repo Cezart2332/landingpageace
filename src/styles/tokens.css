@@ -1,15 +1,15 @@
 :root {
   /* ─── Accent ─────────────────────────────────────────────── */
-  --color-accent:        #f59e0b;
-  --color-accent-light:  #fbbf24;
-  --color-accent-dark:   #d97706;
-  --color-accent-glow:   rgba(245, 158, 11, 0.18);
-  --color-accent-border: rgba(245, 158, 11, 0.35);
+  --color-accent:        #10b981;
+  --color-accent-light:  #34d399;
+  --color-accent-dark:   #059669;
+  --color-accent-glow:   rgba(16, 185, 129, 0.18);
+  --color-accent-border: rgba(16, 185, 129, 0.35);
 
   /* ─── Legacy aliases (used in existing CSS) ──────────────── */
-  --color-primary:       #f59e0b;
-  --color-primary-dark:  #d97706;
-  --color-secondary:     #fbbf24;
+  --color-primary:       #10b981;
+  --color-primary-dark:  #059669;
+  --color-secondary:     #34d399;
 
   /* ─── Backgrounds ────────────────────────────────────────── */
   --color-bg:            #09090e;
@@ -25,7 +25,7 @@
 
   /* ─── Borders ────────────────────────────────────────────── */
   --color-border:        rgba(255, 255, 255, 0.07);
-  --color-border-hover:  rgba(245, 158, 11, 0.35);
+  --color-border-hover:  rgba(16, 185, 129, 0.35);
 
   /* ─── Typography (fonts set on <html> via next/font) ─────── */
 
@@ -46,7 +46,7 @@
 
   /* ─── Layout ─────────────────────────────────────────────── */
   --max-width:  1200px;
-  --nav-height: 72px;
+  --nav-height: 76px;
 
   /* ─── Motion ─────────────────────────────────────────────── */
   --transition: 200ms ease;
@@ -55,6 +55,6 @@
   --shadow-sm:     0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow-md:     0 8px 24px rgba(0, 0, 0, 0.6);
   --shadow-lg:     0 16px 48px rgba(0, 0, 0, 0.7);
-  --shadow-accent: 0 0 32px rgba(245, 158, 11, 0.15);
-  --focus-ring:    0 0 0 3px rgba(245, 158, 11, 0.4);
+  --shadow-accent: 0 0 32px rgba(16, 185, 129, 0.15);
+  --focus-ring:    0 0 0 3px rgba(16, 185, 129, 0.4);
 }

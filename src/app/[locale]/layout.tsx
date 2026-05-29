@@ -1,6 +1,20 @@
 import type { Metadata } from 'next'
+import { DM_Sans, Space_Grotesk } from 'next/font/google'
 import { translations } from '@/i18n/translations'
 import type { Locale } from '@/i18n/types'
+import '@/app/globals.css'
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-heading',
+  weight: ['400', '500', '600', '700'],
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-body',
+  weight: ['400', '500', '700'],
+})
 
 type Props = {
   children: React.ReactNode
@@ -80,24 +94,22 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <>
-      <html lang={safeLocale}>
-        <head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-          />
-        </head>
-        <body>{children}</body>
-      </html>
-    </>
+    <html lang={safeLocale} className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      </head>
+      <body>{children}</body>
+    </html>
   )
 }

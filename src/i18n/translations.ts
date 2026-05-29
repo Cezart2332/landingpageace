@@ -19,6 +19,7 @@ export type Translations = {
   }
   nav: {
     solutions: string
+    portfolio: string
     why: string
     process: string
     faq: string
@@ -27,6 +28,7 @@ export type Translations = {
   }
   hero: {
     badge: string
+    rotating: string[]
     headline: string[]
     sub: string
     ctaPrimary: string
@@ -139,6 +141,7 @@ const ro: Translations = {
   },
   nav: {
     solutions: 'Soluții',
+    portfolio: 'Portofoliu',
     why: 'De ce noi',
     process: 'Proces',
     faq: 'Întrebări',
@@ -146,7 +149,8 @@ const ro: Translations = {
     bookCall: 'Programează un call',
   },
   hero: {
-    badge: 'Soluții software pentru echipe în creștere',
+    badge: 'ACE Technologies',
+    rotating: ['Web Design', 'Web Development', 'Native App Development'],
     headline: ['Software', 'care', 'îți', 'propulsează', 'afacerea', 'înainte'],
     sub: 'ACE Technologies proiectează, construiește și livrează software personalizat — de la platforme cloud la integrări care conectează întregul tău stack.',
     ctaPrimary: 'Programează un call de descoperire',
@@ -371,6 +375,7 @@ const en: Translations = {
   },
   nav: {
     solutions: 'Solutions',
+    portfolio: 'Portfolio',
     why: 'Why us',
     process: 'Process',
     faq: 'FAQ',
@@ -378,7 +383,8 @@ const en: Translations = {
     bookCall: 'Book a call',
   },
   hero: {
-    badge: 'Software solutions for growing teams',
+    badge: 'ACE Technologies',
+    rotating: ['Web Design', 'Web Development', 'Native App Development'],
     headline: ['Software', 'that', 'moves', 'your', 'business', 'forward'],
     sub: 'ACE Technologies designs, builds, and ships custom software—from cloud platforms to integrations that connect your entire stack.',
     ctaPrimary: 'Book a discovery call',
