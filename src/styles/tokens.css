@@ -11,8 +11,7 @@
   --color-border: #e0f2fe;
   --color-border-hover: #7dd3fc;
 
-  --font-heading: 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  /* --font-heading and --font-body are set on <html> via next/font in app/layout.tsx */
 
   --radius-sm: 8px;
   --radius-md: 12px;
