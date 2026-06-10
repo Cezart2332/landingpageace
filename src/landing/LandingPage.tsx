@@ -75,6 +75,8 @@ export default function LandingPage({ locale, t }: LandingPageProps) {
             portfolio={t.portfolio}
             prevLabel={t.a11y.prevProject}
             nextLabel={t.a11y.nextProject}
+            openProjectLabel={t.a11y.openProject}
+            closeModalLabel={t.a11y.closeModal}
           />
           <SolutionsGrid solutions={t.solutions} />
           <WhyUs why={t.why} />

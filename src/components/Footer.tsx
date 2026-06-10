@@ -10,7 +10,7 @@ export default function Footer({ footer, nav, a11y }: Props) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="footer">
+    <footer className="footer" data-reveal>
       <div className="container footer-grid">
         <div className="footer-brand">
           <a href="#" className="footer-logo">

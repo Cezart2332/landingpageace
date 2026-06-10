@@ -29,7 +29,7 @@ function revealStaggerList(list: Element) {
     },
   )
 
-  list.querySelectorAll('.solution-icon, .pillar-icon, .process-icon').forEach(
+  list.querySelectorAll('.solution-row-icon, .why-strip-icon, .process-rail-dot').forEach(
     (icon, i) => {
       gsap.fromTo(
         icon,
@@ -96,6 +96,81 @@ function setupCountUp(root: HTMLElement) {
   })
 }
 
+function setupBelowFoldMotion(root: HTMLElement) {
+  root.querySelectorAll('.solution-row-visual').forEach((visual) => {
+    gsap.fromTo(
+      visual,
+      { scale: 0.92, opacity: 0.7 },
+      {
+        scale: 1,
+        opacity: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: visual,
+          start: 'top 88%',
+          end: 'top 45%',
+          scrub: 1.2,
+        },
+      },
+    )
+  })
+
+  const spineFill = root.querySelector('.process-rail-spine-fill')
+  const processWrap = root.querySelector('.process-rail-wrap')
+  if (spineFill && processWrap) {
+    gsap.fromTo(
+      spineFill,
+      { scaleY: 0, transformOrigin: 'top center' },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: processWrap,
+          start: 'top 78%',
+          end: 'bottom 62%',
+          scrub: 1,
+        },
+      },
+    )
+  }
+
+  const ctaBand = root.querySelector('.cta-band-inner')
+  if (ctaBand) {
+    gsap.fromTo(
+      ctaBand,
+      { scale: 0.97 },
+      {
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.cta-band',
+          start: 'top 90%',
+          end: 'top 50%',
+          scrub: 1.5,
+        },
+      },
+    )
+  }
+}
+
+function setupSceneScrollDepth(root: HTMLElement) {
+  const main = root.querySelector('.site-main')
+  if (!main) return
+
+  gsap.to('.page-canvas-inner', {
+    yPercent: 5,
+    scale: 1.035,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: main,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 2,
+    },
+  })
+
+}
+
 function setupCursorGlow() {
   const glow = document.querySelector<HTMLElement>('.cursor-glow')
   if (!glow) return
@@ -132,9 +207,11 @@ export function useLandingAnimations(
           x: 0,
         })
         gsap.set(root.querySelectorAll('[data-reveal]'), { opacity: 0, y: 40 })
-        root.querySelectorAll('.testimonial-card').forEach((card) => {
-          gsap.killTweensOf(card)
-          gsap.set(card, { x: 0, y: 0, scale: 1, opacity: 1, clearProps: 'transform' })
+        gsap.set(root.querySelectorAll('[data-reveal-child].testimonial-card'), {
+          opacity: 0,
+          y: 80,
+          scale: 0.9,
+          x: 0,
         })
 
         gsap.set('[data-animate="nav"]', { y: -20, opacity: 0 })
@@ -198,6 +275,9 @@ export function useLandingAnimations(
           },
         })
 
+        setupBelowFoldMotion(root)
+        setupSceneScrollDepth(root)
+
         setupCountUp(root)
 
         /* ─── [data-reveal] scroll batch ─────────────────────── */
@@ -237,15 +317,16 @@ export function useLandingAnimations(
 
         /* ─── CTA banner ──────────────────────────────────────── */
         gsap.fromTo(
-          '.cta-banner-inner',
-          { opacity: 0, y: 60 },
+          '.cta-band-inner',
+          { opacity: 0, y: 48, scale: 0.98 },
           {
             opacity: 1,
             y: 0,
+            scale: 1,
             duration: 0.9,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: '.cta-banner',
+              trigger: '.cta-band',
               start: 'top 85%',
               once: true,
             },
@@ -323,7 +404,7 @@ export function useLandingAnimations(
 
         /* ─── Card hover spotlight & dynamic elevate ─────────── */
         const cards = root.querySelectorAll<HTMLElement>(
-          '.solution-card, .pillar-card, .process-card'
+          '.process-rail-panel, .testimonial-card, .faq-item'
         )
 
         const onCardMouseMove = (e: MouseEvent) => {
@@ -339,7 +420,7 @@ export function useLandingAnimations(
           const card = e.currentTarget as HTMLElement
           gsap.to(card, {
             y: -8,
-            boxShadow: '0 16px 36px rgba(37, 99, 235, 0.12), var(--shadow-tinted)',
+            boxShadow: '0 16px 36px rgba(37, 99, 235, 0.14), var(--shadow-tinted)',
             borderColor: 'var(--color-accent-border)',
             duration: 0.35,
             ease: 'power2.out',
@@ -396,7 +477,7 @@ export function useLandingAnimations(
         })
         gsap.set(
           root.querySelectorAll(
-            '[data-animate="nav"], .scene-layer, .hero-reveal, .hero-word, .hero-actions .btn, [data-reveal], [data-reveal-child], .cta-banner-inner',
+            '[data-animate="nav"], .scene-layer, .hero-reveal, .hero-word, .hero-actions .btn, [data-reveal], [data-reveal-child], .cta-band-inner',
           ),
           { clearProps: 'all' },
         )

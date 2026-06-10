@@ -1,13 +1,16 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import PortfolioModal, { type PortfolioItem } from './PortfolioModal'
 import type { Translations } from '@/i18n/translations'
 
 type Props = {
   portfolio: Translations['portfolio']
   prevLabel: string
   nextLabel: string
+  openProjectLabel: string
+  closeModalLabel: string
 }
 
 /* One full rotation = 25 s. Step = 25s / n cards. */
@@ -17,12 +20,20 @@ function easeInOut(t: number): number {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
 }
 
-export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Props) {
+export default function PortfolioSection({
+  portfolio,
+  prevLabel,
+  nextLabel,
+  openProjectLabel,
+  closeModalLabel,
+}: Props) {
   const trackRef = useRef<HTMLUListElement>(null)
   const animRef = useRef<Animation | null>(null)
   const navRafRef = useRef<number>(0)
+  const [selected, setSelected] = useState<PortfolioItem | null>(null)
 
   const n = portfolio.items.length
+  const modalOpen = selected !== null
 
   /* ─── Start Web Animations API loop ───────────────────────
      translateX(-50%) on a track with 2 equal copies always
@@ -41,16 +52,33 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
     }
   }, [])
 
-  /* ─── Hover: pause / resume ────────────────────────────── */
-  const pause = () => animRef.current?.pause()
-  const resume = () => animRef.current?.play()
+  /* Pause carousel while modal is open */
+  useEffect(() => {
+    const anim = animRef.current
+    if (!anim) return
+    if (modalOpen) anim.pause()
+    else anim.play()
+  }, [modalOpen])
+
+  const pause = () => {
+    if (!modalOpen) animRef.current?.pause()
+  }
+  const resume = () => {
+    if (!modalOpen) animRef.current?.play()
+  }
+
+  const openProject = (item: PortfolioItem) => {
+    animRef.current?.pause()
+    setSelected(item)
+  }
+
+  const closeProject = () => setSelected(null)
 
   /* ─── Arrow nav: smooth step via currentTime easing ───── */
   const navigate = (dir: 'prev' | 'next') => {
     const anim = animRef.current
-    if (!anim) return
+    if (!anim || modalOpen) return
 
-    /* Cancel any in-progress navigation */
     if (navRafRef.current) cancelAnimationFrame(navRafRef.current)
 
     anim.pause()
@@ -62,7 +90,6 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
     if (target >= LOOP_MS) target -= LOOP_MS
     if (target < 0) target += LOOP_MS
 
-    /* Take shortest path around the circle */
     let delta = target - current
     if (delta > LOOP_MS / 2) delta -= LOOP_MS
     if (delta < -LOOP_MS / 2) delta += LOOP_MS
@@ -82,13 +109,11 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
     navRafRef.current = requestAnimationFrame(tick)
   }
 
-  /* Render 2 copies for the seamless loop */
   const doubled = [...portfolio.items, ...portfolio.items]
 
   return (
     <section id="portfolio" className="portfolio-section">
-      <div className="container portfolio-header">
-        <span className="section-label">{portfolio.label}</span>
+      <div className="container portfolio-header section-intro section-intro--left">
         <h2 className="section-title">{portfolio.title}</h2>
       </div>
 
@@ -102,6 +127,7 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
           className="portfolio-nav prev"
           aria-label={prevLabel}
           onClick={() => navigate('prev')}
+          disabled={modalOpen}
         >
           <ChevronLeft size={20} aria-hidden="true" />
         </button>
@@ -114,20 +140,28 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
                 className="portfolio-card"
                 aria-hidden={index >= n}
               >
-                <div className="portfolio-card-inner">
-                  <div className="portfolio-card-body">
-                    <div className="portfolio-meta">
-                      <span className="portfolio-category">{item.category}</span>
-                      <span className="portfolio-year">{item.year}</span>
+                <button
+                  type="button"
+                  className="portfolio-card-trigger"
+                  aria-label={`${openProjectLabel}: ${item.title}`}
+                  tabIndex={index >= n ? -1 : 0}
+                  onClick={() => openProject(item)}
+                >
+                  <div className="portfolio-card-inner">
+                    <div className="portfolio-card-body">
+                      <div className="portfolio-meta">
+                        <span className="portfolio-category">{item.category}</span>
+                        <span className="portfolio-year">{item.year}</span>
+                      </div>
+                      <h3 className="portfolio-title">{item.title}</h3>
+                      <span className="portfolio-tag">{item.tag}</span>
                     </div>
-                    <h3 className="portfolio-title">{item.title}</h3>
-                    <span className="portfolio-tag">{item.tag}</span>
-                  </div>
 
-                  <div className="portfolio-card-arrow">
-                    <ArrowUpRight size={20} aria-hidden="true" />
+                    <div className="portfolio-card-arrow">
+                      <ArrowUpRight size={20} aria-hidden="true" />
+                    </div>
                   </div>
-                </div>
+                </button>
               </li>
             ))}
           </ul>
@@ -138,6 +172,7 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
           className="portfolio-nav next"
           aria-label={nextLabel}
           onClick={() => navigate('next')}
+          disabled={modalOpen}
         >
           <ChevronRight size={20} aria-hidden="true" />
         </button>
@@ -149,6 +184,13 @@ export default function PortfolioSection({ portfolio, prevLabel, nextLabel }: Pr
           <ArrowUpRight size={16} aria-hidden="true" />
         </a>
       </div>
+
+      <PortfolioModal
+        item={selected}
+        closeLabel={closeModalLabel}
+        visitLabel={portfolio.visitSite}
+        onClose={closeProject}
+      />
     </section>
   )
 }
