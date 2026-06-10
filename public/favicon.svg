@@ -1,4 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="8" fill="#0EA5E9"/>
-  <text x="16" y="21" text-anchor="middle" fill="white" font-family="system-ui,sans-serif" font-size="11" font-weight="700">ACE</text>
+  <defs>
+    <linearGradient id="fl" x1="5" y1="29" x2="17" y2="2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#002E94"/>
+      <stop offset="0.5" stop-color="#0B5ED2"/>
+      <stop offset="1" stop-color="#62B8F8"/>
+    </linearGradient>
+    <linearGradient id="fr" x1="26" y1="29" x2="15" y2="2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3C98EE"/>
+      <stop offset="0.5" stop-color="#64BAF8"/>
+      <stop offset="1" stop-color="#C2E6FF"/>
+    </linearGradient>
+  </defs>
+  <!-- Left arm -->
+  <path d="M19.6 6.4 A 3.1 3.1 0 0 0 13.7 5.2 L4.4 25.2 A 3.1 3.1 0 0 0 10.3 26.4 Z" fill="url(#fl)"/>
+  <!-- Right arm -->
+  <path d="M12.8 6.6 A 2.8 2.8 0 0 1 18.5 5.5 L27.2 24.8 A 2.8 2.8 0 0 1 21.5 26 Z" fill="url(#fr)"/>
+  <!-- Nib -->
+  <path d="M16 14.5 L17.5 18 L16 21.5 L14.5 18 Z" fill="#003CA5"/>
+  <!-- Stem -->
+  <line x1="16" y1="21" x2="16" y2="26" stroke="#0752D4" stroke-width="0.7" stroke-linecap="round"/>
+  <!-- Dot -->
+  <circle cx="16" cy="27" r="1" fill="#0752D4"/>
 </svg>
