@@ -161,6 +161,21 @@ body {
   overflow: hidden;
 }
 
+.page-canvas-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(37, 99, 235, 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 45% at 85% 75%, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+}
+
+.page-canvas-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-canvas {
   position: absolute;
   inset: 0;
@@ -170,7 +185,10 @@ body {
 
 .page-canvas-glow {
   position: absolute;
-  inset: 0;
+  right: 0;
+  bottom: 0;
+  width: min(64vw, 840px);
+  height: min(92vh, 920px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,16 +197,27 @@ body {
 
 .page-canvas-glow::before {
   content: '';
-  width: min(700px, 90vw);
-  height: min(700px, 90vw);
+  width: min(88%, 680px);
+  height: min(88%, 680px);
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(37, 99, 235, 0.12) 0%,
-    rgba(37, 99, 235, 0.04) 40%,
+    rgba(37, 99, 235, 0.14) 0%,
+    rgba(37, 99, 235, 0.05) 40%,
     transparent 70%
   );
   animation: hero-glow-pulse 4s ease-in-out infinite;
+}
+
+@media (max-width: 900px) {
+  .page-canvas-glow {
+    right: 50%;
+    bottom: 0;
+    width: min(100vw, 560px);
+    height: min(68vh, 600px);
+    transform: translateX(50%);
+    opacity: 0.8;
+  }
 }
 
 @keyframes hero-glow-pulse {

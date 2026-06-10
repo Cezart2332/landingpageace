@@ -11,9 +11,10 @@ export default function PageCanvas() {
 
   return (
     <div className="page-canvas">
+      <div className="page-canvas-ambient" aria-hidden="true" />
       <div className="page-canvas-inner">
         <HeroScene />
-        <div className="page-canvas-glow" />
+        <div className="page-canvas-glow" aria-hidden="true" />
       </div>
     </div>
   )
