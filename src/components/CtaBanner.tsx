@@ -6,13 +6,15 @@ type Props = {
 
 export default function CtaBanner({ cta }: Props) {
   return (
-    <section className="cta-banner" data-reveal>
-      <div className="container cta-banner-inner">
-        <div className="cta-banner-copy">
-          <h2 className="cta-banner-title">{cta.title}</h2>
-          <p className="cta-banner-desc">{cta.description}</p>
+    <section className="cta-band" aria-labelledby="cta-band-title">
+      <div className="container cta-band-inner" data-reveal>
+        <div className="cta-band-copy">
+          <h2 id="cta-band-title" className="cta-band-title">
+            {cta.title}
+          </h2>
+          <p className="cta-band-desc">{cta.description}</p>
         </div>
-        <a href="#contact" className="btn btn-primary btn-lg">
+        <a href="#contact" className="btn btn-primary btn-lg cta-band-btn">
           {cta.button}
         </a>
       </div>

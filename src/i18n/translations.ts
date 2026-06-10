@@ -18,6 +18,8 @@ export type Translations = {
     switchToEn: string
     prevProject: string
     nextProject: string
+    openProject: string
+    closeModal: string
   }
   nav: {
     solutions: string
@@ -112,12 +114,15 @@ export type Translations = {
     label: string
     title: string
     viewAll: string
+    visitSite: string
     items: {
       id: string
       title: string
       category: string
       year: string
       tag: string
+      description: string
+      url: string
     }[]
   }
   marquee: {
@@ -144,6 +149,8 @@ const ro: Translations = {
     switchToEn: 'English',
     prevProject: 'Proiectul anterior',
     nextProject: 'Proiectul următor',
+    openProject: 'Vezi detalii proiect',
+    closeModal: 'Închide fereastra',
   },
   nav: {
     solutions: 'Soluții',
@@ -343,12 +350,58 @@ const ro: Translations = {
     label: 'Portofoliu',
     title: 'Proiecte care vorbesc de la sine',
     viewAll: 'Vezi toate proiectele',
+    visitSite: 'Vizitează site-ul',
     items: [
-      { id: '01', title: 'Nexus Platform', category: 'SaaS', year: '2024', tag: 'Platformă web' },
-      { id: '02', title: 'FlowMetrics', category: 'Analytics', year: '2024', tag: 'Dashboard' },
-      { id: '03', title: 'VaultPay', category: 'Fintech', year: '2025', tag: 'Aplicație mobile' },
-      { id: '04', title: 'OriginCMS', category: 'Content Platform', year: '2025', tag: 'Platformă web' },
-      { id: '05', title: 'PulseOps', category: 'DevOps', year: '2025', tag: 'Tool intern' },
+      {
+        id: '01',
+        title: 'Nexus Platform',
+        category: 'SaaS',
+        year: '2024',
+        tag: 'Platformă web',
+        description:
+          'Platformă multi-tenant pentru echipe care gestionează proiecte, clienți și facturare într-un singur loc. Am livrat onboarding rapid, roluri granulare și rapoarte în timp real.',
+        url: 'https://nexus-platform.io',
+      },
+      {
+        id: '02',
+        title: 'FlowMetrics',
+        category: 'Analytics',
+        year: '2024',
+        tag: 'Dashboard',
+        description:
+          'Dashboard de analytics pentru echipe de produs, cu funnel-uri personalizabile și alerte pe Slack. Date agregate din mai multe surse, fără query-uri manuale.',
+        url: 'https://flowmetrics.app',
+      },
+      {
+        id: '03',
+        title: 'VaultPay',
+        category: 'Fintech',
+        year: '2025',
+        tag: 'Aplicație mobile',
+        description:
+          'Aplicație mobilă de plăți B2B cu autentificare biometrică și reconciliere automată. Fluxuri conforme PCI, testate pe iOS și Android înainte de lansare.',
+        url: 'https://vaultpay.co',
+      },
+      {
+        id: '04',
+        title: 'OriginCMS',
+        category: 'Content Platform',
+        year: '2025',
+        tag: 'Platformă web',
+        description:
+          'Headless CMS pentru site-uri editoriale, cu preview live și workflow de publicare pe mai multe canale. Echipele de marketing își gestionează conținutul fără deploy.',
+        url: 'https://origincms.dev',
+      },
+      {
+        id: '05',
+        title: 'PulseOps',
+        category: 'DevOps',
+        year: '2025',
+        tag: 'Tool intern',
+        description:
+          'Panou intern pentru monitorizarea pipeline-urilor CI/CD și a incidentelor. Vizualizare unificată a statusului serviciilor, cu notificări configurabile per echipă.',
+        url: 'https://pulseops.internal',
+      },
     ],
   },
   marquee: {
@@ -382,6 +435,8 @@ const en: Translations = {
     switchToEn: 'English',
     prevProject: 'Previous project',
     nextProject: 'Next project',
+    openProject: 'View project details',
+    closeModal: 'Close dialog',
   },
   nav: {
     solutions: 'Solutions',
@@ -581,12 +636,58 @@ const en: Translations = {
     label: 'Portfolio',
     title: 'Projects that speak for themselves',
     viewAll: 'View all projects',
+    visitSite: 'Visit website',
     items: [
-      { id: '01', title: 'Nexus Platform', category: 'SaaS', year: '2024', tag: 'Web platform' },
-      { id: '02', title: 'FlowMetrics', category: 'Analytics', year: '2024', tag: 'Dashboard' },
-      { id: '03', title: 'VaultPay', category: 'Fintech', year: '2025', tag: 'Mobile app' },
-      { id: '04', title: 'OriginCMS', category: 'Content Platform', year: '2025', tag: 'Web platform' },
-      { id: '05', title: 'PulseOps', category: 'DevOps', year: '2025', tag: 'Internal tool' },
+      {
+        id: '01',
+        title: 'Nexus Platform',
+        category: 'SaaS',
+        year: '2024',
+        tag: 'Web platform',
+        description:
+          'Multi-tenant platform for teams managing projects, clients, and billing in one place. We shipped fast onboarding, granular roles, and real-time reporting.',
+        url: 'https://nexus-platform.io',
+      },
+      {
+        id: '02',
+        title: 'FlowMetrics',
+        category: 'Analytics',
+        year: '2024',
+        tag: 'Dashboard',
+        description:
+          'Analytics dashboard for product teams with custom funnels and Slack alerts. Data aggregated from multiple sources without manual queries.',
+        url: 'https://flowmetrics.app',
+      },
+      {
+        id: '03',
+        title: 'VaultPay',
+        category: 'Fintech',
+        year: '2025',
+        tag: 'Mobile app',
+        description:
+          'B2B mobile payments app with biometric auth and automatic reconciliation. PCI-compliant flows, tested on iOS and Android before launch.',
+        url: 'https://vaultpay.co',
+      },
+      {
+        id: '04',
+        title: 'OriginCMS',
+        category: 'Content Platform',
+        year: '2025',
+        tag: 'Web platform',
+        description:
+          'Headless CMS for editorial sites with live preview and multi-channel publishing workflows. Marketing teams update content without deploys.',
+        url: 'https://origincms.dev',
+      },
+      {
+        id: '05',
+        title: 'PulseOps',
+        category: 'DevOps',
+        year: '2025',
+        tag: 'Internal tool',
+        description:
+          'Internal panel for CI/CD pipeline and incident monitoring. Unified service status view with configurable alerts per team.',
+        url: 'https://pulseops.internal',
+      },
     ],
   },
   marquee: {

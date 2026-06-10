@@ -75,7 +75,7 @@ export default function ContactCTA({ contact }: Props) {
   }
 
   return (
-    <section id="contact" className="section section-solid contact-section">
+    <section id="contact" className="section section-inset contact-section">
       <div className="container">
         <div className="contact-layout">
           <div className="contact-info">
@@ -84,6 +84,7 @@ export default function ContactCTA({ contact }: Props) {
               label={contact.label}
               title={contact.title}
               description={contact.description}
+              showLabel
             />
             <ul className="contact-details">
               <li>

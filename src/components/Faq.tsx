@@ -13,7 +13,7 @@ export default function Faq({ faq }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="section section-solid faq-section">
+    <section id="faq" className="section section-surface faq-section">
       <div className="container">
         <div className="faq-split-layout">
           {/* Left Column: Heading and Support CTA */}
@@ -23,6 +23,7 @@ export default function Faq({ faq }: Props) {
               label={faq.label}
               title={faq.title}
               description={faq.description}
+              showLabel
             />
             <div className="faq-support-card" data-reveal>
               <div className="faq-support-icon" aria-hidden="true">

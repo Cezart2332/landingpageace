@@ -10,7 +10,7 @@ export default function StatsBand({ stats, a11yLabel }: Props) {
   return (
     <section className="stats-band" aria-label={a11yLabel}>
       <div className="container">
-        <ul className="stats-grid" data-reveal-stagger data-count-trigger>
+        <ul className="stats-rail" data-reveal-stagger data-count-trigger>
           <AnimatedStat end={120} suffix="+" label={stats.projects} />
           <AnimatedStat end={98} suffix="%" label={stats.satisfaction} />
           <AnimatedStat end={8} suffix={stats.experienceSuffix} label={stats.experience} />

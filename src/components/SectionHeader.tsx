@@ -3,6 +3,8 @@ interface SectionHeaderProps {
   title: string
   description: string
   align?: 'center' | 'left'
+  /** Pill label — use sparingly (max ~1 per 3 sections) */
+  showLabel?: boolean
 }
 
 export default function SectionHeader({
@@ -10,13 +12,14 @@ export default function SectionHeader({
   title,
   description,
   align = 'center',
+  showLabel = false,
 }: SectionHeaderProps) {
   return (
     <header
-      className={`section-header ${align === 'left' ? 'section-header-left' : ''}`}
+      className={`section-intro ${align === 'left' ? 'section-intro--left' : ''}`}
       data-reveal
     >
-      <span className="section-label">{label}</span>
+      {showLabel ? <span className="section-label">{label}</span> : null}
       <h2 className="section-title">{title}</h2>
       <p className="section-desc">{description}</p>
     </header>
